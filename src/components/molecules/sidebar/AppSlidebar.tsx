@@ -10,7 +10,6 @@ import {
   BookingIcon,
   CustomerIcon,
   DashboardIcon,
-  RefundsIcon,
   ReportIcon,
   SearchIcons,
   SettingIcon,
@@ -18,9 +17,10 @@ import {
   TransactionIcon,
   EmployeeIcon,
   CompanyIcon,
-  SupportIcon,
   LogoutIcon,
 } from "@/components/atoms";
+import { AiOutlineDollar } from "react-icons/ai";
+import { MdOutlineSupportAgent } from "react-icons/md";
 
 type SidebarItem = {
   label: string;
@@ -32,7 +32,7 @@ const items: SidebarItem[] = [
   { label: "Dashboard", href: "/dashboard", icon: DashboardIcon },
   { label: "Search", href: "/search", icon: SearchIcons },
   { label: "Booking", href: "/booking", icon: BookingIcon },
-  { label: "Refund", href: "#", icon: RefundsIcon },
+  { label: "Refund", href: "#", icon: AiOutlineDollar  },
   { label: "Transactions", href: "#", icon: TransactionIcon },
   { label: "Topup Request", href: "#", icon: TopupIcon },
   { label: "Customer", href: "#", icon: CustomerIcon },
@@ -40,7 +40,7 @@ const items: SidebarItem[] = [
   { label: "Setting", href: "#", icon: SettingIcon },
   { label: "Employees", href: "#", icon: EmployeeIcon },
   { label: "Company Profile", href: "#", icon: CompanyIcon },
-  { label: "Support", href: "#", icon: SupportIcon },
+  { label: "Support", href: "#", icon: MdOutlineSupportAgent  },
 ];
 
 const AppSlidebar: React.FC = () => {
@@ -74,8 +74,8 @@ const AppSlidebar: React.FC = () => {
           !isOpen && "justify-center"
         )}
       >
-        <div className="transition-colors duration-300">
-          <Icon fill={isActive ? "white" : "black"} className="group-hover:fill-white" />
+        <div className="transition-colors duration-300 ">
+          <Icon  fill={isActive ? "white" : "black"} className="h-5 w-5 fill-gray-900  group-hover:fill-white transition-colors duration-200" />
         </div>
         {isOpen && <>{item.label}</>}
       </Link>
