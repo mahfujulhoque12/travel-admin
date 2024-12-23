@@ -25,11 +25,11 @@ const ReusableTable: React.FC<ReusableTableProps> = ({ data, columns }) => {
   // Function to get status color
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Booked':
+      case 'booked':
         return 'text-[#20B038]';
-      case 'Hold':
-        return 'text-yellow-400';
-      case 'Cancelled':
+      case 'hold':
+        return ' text-yellow-400';
+      case 'cancelled':
         return ' text-red-700';
       default:
         return ' text-gray-700';
