@@ -1,7 +1,7 @@
-import React from 'react';
-import ReusableButton from './ReusableButton';
+import React from "react";
+import ReusableButton from "./ReusableButton";
 
-type CellType = 'button' | 'text' | 'checkbox' | 'image' | 'select';
+type CellType = "button" | "text" | "checkbox" | "image" | "select";
 
 export interface ColumnConfig {
   key: string;
@@ -19,20 +19,20 @@ export interface ColumnConfig {
 interface ReusableTableProps {
   data: any[];
   columns: ColumnConfig[];
+// New prop for handling delete action
 }
 
 const ReusableTable: React.FC<ReusableTableProps> = ({ data, columns }) => {
-  // Function to get status color
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'booked':
-        return 'text-[#20B038]';
-      case 'hold':
-        return ' text-yellow-400';
-      case 'cancelled':
-        return ' text-red-700';
+      case "booked":
+        return "text-[#20B038]";
+      case "hold":
+        return "text-yellow-400";
+      case "cancelled":
+        return "text-red-700";
       default:
-        return ' text-gray-700';
+        return "text-gray-700";
     }
   };
 
@@ -53,42 +53,46 @@ const ReusableTable: React.FC<ReusableTableProps> = ({ data, columns }) => {
         </thead>
         <tbody>
           {data.map((row, rowIndex) => (
-            <tr key={rowIndex} className="">
+            <tr key={`row-${row.id || rowIndex}`} className="">
               {columns.map((column) => (
                 <td
-                  key={column.key}
+                  key={`row-${row.id || rowIndex}-col-${column.key}`}
                   className={`border-b px-4 py-2 font-normal text-xs ${
-                    column.key === 'status' && row[column.key] ? getStatusColor(row[column.key]) : 'text-[#243045]'
+                    column.key === "status" && row[column.key]
+                      ? getStatusColor(row[column.key])
+                      : "text-[#243045]"
                   }`}
                 >
-                  {column.type === 'text' && <span>{row[column.key]}</span>}
-                  {column.type === 'button' && column.buttonProps && (
+                  {column.type === "text" && <span>{row[column.key]}</span>}
+                  {column.type === "button" && column.buttonProps && (
                     <ReusableButton
                       label={row[column.buttonProps.labelKey]}
                       onClick={() => column.buttonProps?.onClick(row)}
                       className={column.buttonProps.className}
                     />
                   )}
-                  {column.type === 'checkbox' && (
-                    <input type="checkbox" checked={row[column.key]} readOnly />
+                  {column.type === "checkbox" && (
+                    <input
+                      type="checkbox"
+                      checked={row[column.key]}
+                      readOnly
+                    />
                   )}
-                  {column.type === 'image' && (
+                  {column.type === "image" && (
                     <img
                       src={row[column.key]}
                       alt="Image"
                       className="w-16 h-16 object-cover rounded"
                     />
                   )}
-                  {column.type === 'select' && column.selectOptions && (
+                  {column.type === "select" && column.selectOptions && (
                     <select
                       className="bg-[#D8ECFD] text-[#1768D0] p-2 rounded"
                       defaultValue={row[column.key]}
-                      onChange={(e) =>
-                        column.onSelectChange?.(row, e.target.value)
-                      }
+                      onChange={(e) => {}}
                     >
                       {column.selectOptions.map((option, index) => (
-                        <option key={index} value={option}>
+                        <option key={`${row.id || rowIndex}-opt-${index}`} value={option}>
                           {option}
                         </option>
                       ))}

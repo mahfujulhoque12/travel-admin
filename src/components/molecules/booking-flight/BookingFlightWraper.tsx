@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from "react";
 import ReusableTable, { ColumnConfig } from "./ReusableTable";
 
-interface BookingFlightWraperProps {
-  statusFilter: string; // Add the prop type for statusFilter
+interface BookingFlightWrapperProps {
+  statusFilter: string;
+  searchQuery: string;
 }
 
-const BookingFlightWraper: React.FC<BookingFlightWraperProps> = ({
+const BookingFlightWrapper: React.FC<BookingFlightWrapperProps> = ({
   statusFilter,
+  searchQuery,
 }) => {
   const [data, setData] = useState<any[]>([]);
   const [filteredData, setFilteredData] = useState<any[]>([]);
@@ -17,11 +19,8 @@ const BookingFlightWraper: React.FC<BookingFlightWraperProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/flight-booking`);
+        const response = await fetch("/api/flight-booking");
         if (!response.ok) {
-          if (response.status === 404) {
-            throw new Error("API endpoint not found. Verify the API path.");
-          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const json = await response.json();
@@ -37,14 +36,22 @@ const BookingFlightWraper: React.FC<BookingFlightWraperProps> = ({
   }, []);
 
   useEffect(() => {
-    // Apply filter when statusFilter changes
-    if (statusFilter === "all") {
-      setFilteredData(data);
-    } else {
-      const filtered = data.filter((item) => item.status === statusFilter);
-      setFilteredData(filtered);
+    let filtered = data;
+
+    if (statusFilter !== "all") {
+      filtered = data.filter((item) => item.status === statusFilter);
     }
-  }, [statusFilter, data]);
+
+    if (searchQuery) {
+      filtered = filtered.filter((item) =>
+        item.passengerName.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    setFilteredData(filtered);
+  }, [statusFilter, searchQuery, data]);
+
+
 
   if (error) {
     return <div className="text-red-500">{error}</div>;
@@ -53,7 +60,7 @@ const BookingFlightWraper: React.FC<BookingFlightWraperProps> = ({
   if (data.length === 0) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="text-blue-500">wait please...</div>
+        <div className="text-blue-500">Loading data...</div>
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
       </div>
     );
@@ -63,7 +70,7 @@ const BookingFlightWraper: React.FC<BookingFlightWraperProps> = ({
     { key: "issueDate", type: "text", label: "Issue Date" },
     { key: "bookingDate", type: "text", label: "Booking Date" },
     { key: "bookingID", type: "text", label: "Booking ID" },
-    { key: "passangerName", type: "text", label: "Passenger Name" },
+    { key: "passengerName", type: "text", label: "Passenger Name" },
     { key: "flightDate", type: "text", label: "Flight Date" },
     { key: "route", type: "text", label: "Route" },
     { key: "ticketNumber", type: "text", label: "Ticket Number" },
@@ -84,16 +91,20 @@ const BookingFlightWraper: React.FC<BookingFlightWraperProps> = ({
       key: "action",
       type: "select",
       label: "Action",
-      selectOptions: ["Confirm", "Pending", "Cancel", "Draft"],
-      onSelectChange: (row: any, value: string) => "",
+      selectOptions: ["Confirm", "Pending", "Delete", "Draft"],
+      onSelectChange: () => {},
     },
   ];
 
   return (
     <div>
-      <ReusableTable data={filteredData} columns={columns} />
+      {filteredData.length === 0 ? (
+        <div className="text-center py-8 text-gray-500">No Data Found</div>
+      ) : (
+        <ReusableTable data={filteredData} columns={columns} />
+      )}
     </div>
   );
 };
 
-export default BookingFlightWraper;
+export default BookingFlightWrapper;

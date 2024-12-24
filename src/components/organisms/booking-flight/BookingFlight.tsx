@@ -1,17 +1,18 @@
-"use client"
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 import BookingFlightWraper from "@/components/molecules/booking-flight/BookingFlightWraper";
 import TableHeadWraper from "@/components/molecules/booking-flight/TableHeadWraper";
-import TableHead from "@/components/molecules/booking-flight/TableHead";
+import BookingButton from "@/components/molecules/booking-flight/BookingButton";
 
 const BookingFlight = () => {
-  const [statusFilter, setStatusFilter] = React.useState<string>("all");
-
+  const [statusFilter, setStatusFilter] = React.useState<string>("all"); // Default is "all"
+  const [searchQuery, setSearchQuery] = useState<string>("");
   return (
     <div className="bg-white p-5 rounded-md m-5">
-      <TableHead onFilterChange={setStatusFilter} />
-      <BookingFlightWraper statusFilter={statusFilter} />
+      <BookingButton />
+      <TableHeadWraper onFilterChange={setStatusFilter}  onSearchChange={setSearchQuery} />
+      <BookingFlightWraper statusFilter={statusFilter} searchQuery={searchQuery} />
     </div>
   );
 };

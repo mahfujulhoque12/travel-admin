@@ -2,14 +2,17 @@ import React from "react";
 import { LuDownload } from "react-icons/lu";
 import { IoPrintOutline } from "react-icons/io5";
 import { RiFilter2Line } from "react-icons/ri";
-
 import TopHeaderTwo from "./TopHeaderTwo";
 
-interface TableHeadWraperProps {
-  onFilterChange: (status: string) => void; // Add a prop for filter change
+interface TableHeadWrapperProps {
+  onFilterChange: (status: string) => void;
+  onSearchChange: (query: string) => void; // Add search change handler
 }
 
-const TableHeadWraper: React.FC<TableHeadWraperProps> = ({ onFilterChange }) => {
+const TableHeadWrapper: React.FC<TableHeadWrapperProps> = ({
+  onFilterChange,
+  onSearchChange,
+}) => {
   const buttons = [
     {
       label: "Filter",
@@ -33,18 +36,13 @@ const TableHeadWraper: React.FC<TableHeadWraperProps> = ({ onFilterChange }) => 
 
   return (
     <TopHeaderTwo
-      searchPlaceholder="Search here..."
+      searchPlaceholder="Type Search..."
       datePlaceholder="Pick a date"
-      selectOptions={[
-        { value: "all", label: "All" },
-        { value: "booked", label: "Booked" },
-        { value: "hold", label: "Hold" },
-        { value: "cancelled", label: "Cancelled" },
-      ]}
-      onSelectChange={(value) => onFilterChange(value)} // Trigger filter change
+      onSelectChange={onFilterChange}
+      onSearchChange={onSearchChange} // Pass search change handler
       buttons={buttons}
     />
   );
 };
 
-export default TableHeadWraper;
+export default TableHeadWrapper;
