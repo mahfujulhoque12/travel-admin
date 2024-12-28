@@ -1,12 +1,19 @@
 import React from "react";
 import { Button } from "@/components/atoms/Button";
-import { LuDownload } from "react-icons/lu";
-import { IoSearch, IoPrintOutline } from "react-icons/io5";
-import { RiFilter2Line } from "react-icons/ri";
 
-interface TopHeaderTwoProps {}
+// Define the interface for a button
+interface FilterButton {
+  label: string;
+  onClick: () => void;
+  icon: React.ReactNode;
+  className: string;
+}
 
-const TopHeaderTwo: React.FC<TopHeaderTwoProps> = ({ buttons }) => {
+interface TableFilterButtonProps {
+  buttons: FilterButton[];
+}
+
+const TableFilterButtons: React.FC<TableFilterButtonProps> = ({ buttons }) => {
   return (
     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 ">
       <div className="flex items-center justify-end gap-4">
@@ -25,4 +32,4 @@ const TopHeaderTwo: React.FC<TopHeaderTwoProps> = ({ buttons }) => {
   );
 };
 
-export default TopHeaderTwo;
+export default TableFilterButtons;

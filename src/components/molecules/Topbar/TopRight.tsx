@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { CiMail } from "react-icons/ci";
@@ -19,7 +19,7 @@ const TopRight: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-between items-center gap-10">
+    <div className="flex items-center gap-5 justify-end border">
       <div className="flex gap-5 items-center">
         <div className="flex gap-2">
           <Button className="bg-[#F4F7FE4D] text-[#8391A1] shadow-sm p-2 rounded-full">
