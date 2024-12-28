@@ -87,19 +87,7 @@ const TopHeaderTwo: React.FC<TopHeaderTwoProps> = ({
         </div>
       </div>
 
-      {/* test price  */}
-      <div className="flex justify-start items-center border rounded-md px-3 text-[#8391A1] border-[#257CEB]">
-          <SelectFilter
-            apiUrl="/api/flight-booking"
-            valueKey="passengerName"
-            labelKey="passengerName"
-            onSelectChange={(value) => {
-              console.log("Filter changed:", value);
-              onSelectChange(value);
-            }} 
-          />
-        </div>
-      
+   
 
       {/* Right Section */}
       <div className="flex items-center justify-end gap-4">
