@@ -7,7 +7,7 @@ const carBooking = [
     issueDate: "2024-12-21",
     bookingDate: "2024-12-22",
     bookingID: "B123",
-    passengerName: "John Doe",
+    passengerName: "John Doe car",
     flightDate: "2024-12-25",
     route: "NYC-LAX",
     ticketNumber: "T567",
@@ -83,7 +83,7 @@ const carBooking = [
 ];
 
 // GET handler to fetch flight bookings with pagination
-export async function GET(req) {
+export async function GET(req:Request) {
   const { searchParams } = new URL(req.url);
   const page = parseInt(searchParams.get("page") || "1", 10);
   const limit = parseInt(searchParams.get("limit") || "2", 10);

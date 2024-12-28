@@ -59,11 +59,12 @@ const FlightBookingData: React.FC<BookingPropsType> = ({
   return (
     <div>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 ">
-        <div className="flex border flex-col sm:flex-row sm:justify-start sm:items-center gap-2">
+        <div className="flex gap-2 flex-col sm:flex-row sm:justify-start sm:items-center gap-2">
           <TableSearch
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
+          <DatePicker field="issueDate" setFilter={setDateRangeFilter} />
           {["status"].map((field) => (
             <SelectFilter
               key={field}
@@ -72,7 +73,6 @@ const FlightBookingData: React.FC<BookingPropsType> = ({
               setFilter={setSelectFilter}
             />
           ))}
-          <DatePicker field="issueDate" setFilter={setDateRangeFilter} />
         </div>
         <div className="flex items-center justify-end gap-4">
           {actionButton.map((button, index) => (
