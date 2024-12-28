@@ -65,6 +65,7 @@ const HotelBookingData: React.FC<BookingPropsType> = ({
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
+            <DatePicker field="bookingDate" setFilter={setDateRangeFilter} />
           {["status"].map((field) => (
             <SelectFilter
               key={field}
@@ -73,7 +74,6 @@ const HotelBookingData: React.FC<BookingPropsType> = ({
               setFilter={setSelectFilter}
             />
           ))}
-          <DatePicker field="bookingDate" setFilter={setDateRangeFilter} />
         </div>
         <div className="flex items-center justify-end gap-4">
           {actionButton.map((button, index) => (

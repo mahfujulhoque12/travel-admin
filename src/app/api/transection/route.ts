@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 
 // Static data for flight bookings
-const flightBookings = [
+const transection = [
   {
     id: 1,
     issueDate: "2024-12-21",
     bookingDate: "2024-12-22",
     bookingID: "B123",
-    passengerName: "John Doe flight",
+    passengerName: "John report hajj",
     flightDate: "2024-12-25",
     route: "NYC-LAX",
     ticketNumber: "T567",
@@ -83,7 +83,7 @@ const flightBookings = [
 ];
 
 // GET handler to fetch flight bookings with pagination
-export async function GET(req) {
+export async function GET(req:Request) {
   const { searchParams } = new URL(req.url);
   const page = parseInt(searchParams.get("page") || "1", 10);
   const limit = parseInt(searchParams.get("limit") || "2", 10);
@@ -91,15 +91,15 @@ export async function GET(req) {
   const startIndex = (page - 1) * limit;
   const endIndex = startIndex + limit;
 
-  const paginatedData = flightBookings.slice(startIndex, endIndex);
+  const paginatedData = transection.slice(startIndex, endIndex);
 
-  const totalPages = Math.ceil(flightBookings.length / limit);
+  const totalPages = Math.ceil(transection.length / limit);
 
   return NextResponse.json({
     page,
     limit,
     totalPages,
-    totalItems: flightBookings.length,
+    totalItems: transection.length,
     data: paginatedData,
   });
 }

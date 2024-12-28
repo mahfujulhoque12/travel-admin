@@ -7,7 +7,7 @@ const hotelBooking = [
     issueDate: "2024-12-21",
     bookingDate: "2024-12-22",
     bookingID: "B123",
-    passengerName: "John Doe",
+    passengerName: "John Doe hotel",
     flightDate: "2024-12-25",
     route: "NYC-LAX",
     ticketNumber: "T567",

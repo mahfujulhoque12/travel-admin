@@ -7,9 +7,9 @@ import Pagination from "@/components/molecules/global/Pagination";
 import { useFlightBookingFilter } from "@/hooks/filter/useFilter";
 import { ColumnConfig } from "@/components/molecules/global/Table";
 import DatePicker from "@/components/molecules/global/DatePicker";
+import { Button } from "@/components/atoms/Button";
 import { BookingPropsType } from "@/types/component";
 import { BookingDataType } from "@/hooks/useFetchData";
-import { Button } from "@/components/atoms/Button";
 
 const columns: ColumnConfig[] = [
   { key: "issueDate", type: "text", label: "Issue Date" },
@@ -40,12 +40,12 @@ const columns: ColumnConfig[] = [
   },
 ];
 
-const CarBookingData: React.FC<BookingPropsType> = ({
+const VisaData: React.FC<BookingPropsType> = ({
   data,
   currentPage,
   totalPages,
   onPageChange,
-  actionButton
+  actionButton,
 }) => {
   const {
     filteredTableData,
@@ -104,4 +104,4 @@ const CarBookingData: React.FC<BookingPropsType> = ({
   );
 };
 
-export default CarBookingData;
+export default VisaData;

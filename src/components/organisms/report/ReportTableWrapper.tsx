@@ -1,9 +1,5 @@
 "use client";
 import { useState } from "react";
-import FlightBookingData from "@/components/organisms/Booking/FlightBookingData";
-import HotelBookingData from "@/components/organisms/Booking/HotelBookingData";
-import PackageBookingData from "@/components/organisms/Booking/PackageBookingData";
-import CarBookingData from "@/components/organisms/Booking/CarBookingData";
 import TabNavigation from "@/components/molecules/global/TabNavigation";
 import Loader from "@/components/molecules/global/Loader";
 import { usePaginatedFetchData } from "@/hooks/useFetchData";
@@ -11,19 +7,23 @@ import { LuPlaneTakeoff } from "react-icons/lu";
 import { LuDownload } from "react-icons/lu";
 import { IoPrintOutline } from "react-icons/io5";
 import { RiFilter2Line } from "react-icons/ri";
-import HajjUmrahData from "./HajjUmrahData";
+import { IoAddSharp } from "react-icons/io5";
 import { LuHotel } from "react-icons/lu";
 import { GiPalmTree } from "react-icons/gi";
-import { TiWorldOutline } from "react-icons/ti";
-import VisaData from "./VisaData";
+
+
 import { FaCar } from "react-icons/fa";
 import { PiMosqueThin } from "react-icons/pi";
 
+import ReportFlightData from './ReportFlightData';
+import ReportHotelData from './ReportHotelData';
+import ReportPackageData from './ReportPackageData'
+import ReportCarData from "./ReportCarData";
+import ReportHajjData from "./ReportHajjData";
 const tabs = [
   { label: "Flight", icon: <LuPlaneTakeoff size={20}/> },
   { label: "Hotel", icon: <LuHotel size={20} /> },
   { label: "Package", icon: <GiPalmTree size={20} /> },
-  { label: "Visa", icon: <TiWorldOutline size={20} /> },
   { label: "Car", icon: <FaCar  size={20} /> },
   { label: "Hajj & Umrah", icon: <PiMosqueThin size={20} /> },
 
@@ -48,18 +48,23 @@ const buttons = [
     icon: <IoPrintOutline size={20} />,
     className: "bg-[#1768D0] hover:bg-[#2e77d7]",
   },
+  {
+    label: "Add",
+    onClick: () => console.log("Add clicked"),
+    icon: <IoAddSharp  size={20} />,
+    className: "bg-[#1768D0] hover:bg-[#2e77d7]",
+  },
 ];
 
 const apiUrls = [
-  `${process.env.NEXT_PUBLIC_API_URL}/api/flight-booking`,
-  `${process.env.NEXT_PUBLIC_API_URL}/api/hotel-booking`,
-  `${process.env.NEXT_PUBLIC_API_URL}/api/package-booking`,
-  `${process.env.NEXT_PUBLIC_API_URL}/api/visa`,
-  `${process.env.NEXT_PUBLIC_API_URL}/api/car-booking`,
-  `${process.env.NEXT_PUBLIC_API_URL}/api/hajj-umrah`,
+  `${process.env.NEXT_PUBLIC_API_URL}/api/report-flight`,
+  `${process.env.NEXT_PUBLIC_API_URL}/api/report-hotel`,
+  `${process.env.NEXT_PUBLIC_API_URL}/api/report-package`,
+  `${process.env.NEXT_PUBLIC_API_URL}/api/report-car`,
+  `${process.env.NEXT_PUBLIC_API_URL}/api/report-hajj`,
 ];
 
-const BookingTableWrapper = () => {
+const ReportTableWrapper = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [currentPages, setCurrentPages] = useState<number[]>(
     Array(tabs.length).fill(1)
@@ -88,7 +93,7 @@ const BookingTableWrapper = () => {
     switch (activeTab) {
       case 0:
         return (
-          <FlightBookingData
+          <ReportFlightData
             data={data[apiUrls[0]] || []}
             currentPage={currentPages[0]}
             totalPages={totalPages}
@@ -98,7 +103,7 @@ const BookingTableWrapper = () => {
         );
       case 1:
         return (
-          <HotelBookingData
+          <ReportHotelData
             data={data[apiUrls[1]] || []}
             currentPage={currentPages[1]}
             totalPages={totalPages}
@@ -108,7 +113,7 @@ const BookingTableWrapper = () => {
         );
       case 2:
         return (
-          <PackageBookingData
+          <ReportPackageData
             data={data[apiUrls[2]] || []}
             currentPage={currentPages[2]}
             totalPages={totalPages}
@@ -117,35 +122,26 @@ const BookingTableWrapper = () => {
           />
         );
         case 3:
-          return (
-            <VisaData
-              data={data[apiUrls[3]] || []}
-              currentPage={currentPages[3]}
-              totalPages={totalPages}
-              onPageChange={(page) => handlePageChange(3, page)}
-              actionButton={buttons}
-            />
-          );
-      case 4:
-        return (
-          <CarBookingData
-            data={data[apiUrls[4]] || []}
-            currentPage={currentPages[4]}
-            totalPages={totalPages}
-            onPageChange={(page) => handlePageChange(4, page)}
-            actionButton={buttons}
-          />
-        );
-        case 5:
-          return (
-            <HajjUmrahData
-              data={data[apiUrls[5]] || []}
-              currentPage={currentPages[5]}
-              totalPages={totalPages}
-              onPageChange={(page) => handlePageChange(5, page)}
-              actionButton={buttons}
-            />
-          );
+            return (
+              <ReportCarData
+                data={data[apiUrls[3]] || []}
+                currentPage={currentPages[3]}
+                totalPages={totalPages}
+                onPageChange={(page) => handlePageChange(3, page)}
+                actionButton={buttons}
+              />
+            );
+          
+            case 4:
+                return (
+                  <ReportHajjData
+                    data={data[apiUrls[4]] || []}
+                    currentPage={currentPages[4]}
+                    totalPages={totalPages}
+                    onPageChange={(page) => handlePageChange(4, page)}
+                    actionButton={buttons}
+                  />
+                );
          
       default:
         return null;
@@ -160,4 +156,4 @@ const BookingTableWrapper = () => {
   );
 };
 
-export default BookingTableWrapper;
+export default ReportTableWrapper;

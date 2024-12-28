@@ -3,6 +3,7 @@ import { DayPicker, DateRange } from "react-day-picker";
 import { Button } from "@/components/atoms/Button";
 import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
+import { FaCalendarAlt } from "react-icons/fa";
 
 interface DatePickerProps {
   field: string;
@@ -75,32 +76,21 @@ const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <div
       ref={datePickerRef}
-      className="relative inline-block text-left w-[350px]"
+      className="relative inline-block text-left "
     >
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center justify-between w-full border border-gray-400 rounded-lg px-4 py-2 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex items-center gap-3 w-full border border-[#7C7C7C] rounded-lg px-4 py-2 text-sm text-gray-700 bg-white focus:outline-none  "
       >
-        <span>{getPlaceholderText()}</span>
-        <svg
-          className="w-5 h-5 text-gray-400"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 01.02-1.06z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <span className="text-[#7C7C7C]">{getPlaceholderText()}</span>
+        <FaCalendarAlt className="text-[#7C7C7C]"/>
       </button>
 
       {isOpen && (
         <>
-          <div className="absolute mt-2 w-full z-10 py-2 bg-white border border-gray-300 rounded-lg shadow-lg max-w-full">
+          <div className="absolute mt-2 z-10 py-2 px-4 bg-white border border-gray-300 rounded-lg shadow-lg ">
             <DayPicker
-              className="p-2 flex items-center justify-center"
+              className=" flex items-center justify-center"
               mode="range"
               selected={tempRange || undefined}
               onSelect={(range) => setTempRange(range ?? null)}
