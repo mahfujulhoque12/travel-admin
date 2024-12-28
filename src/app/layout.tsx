@@ -32,7 +32,7 @@ export default function RootLayout({
       >
 
 <ReduxProvider>
-<Sidebar/>
+{/* <Sidebar/> */}
         {children}
 </ReduxProvider>
 
