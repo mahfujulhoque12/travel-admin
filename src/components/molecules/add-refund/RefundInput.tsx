@@ -23,33 +23,26 @@ const RefundInput = () => {
       </div>
 
       {/* booking id */}
-      <div className="relative w-full border shadow-sm hover:shadow-md transition-shadow duration-300 ease-in-out border-gray-300 rounded-lg px-4 pt-4 pb-2 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
-  <Label
-    htmlFor="refund-for"
-    className="absolute -top-2 left-4 px-2 text-xs font-normal text-gray-500 bg-white"
-  >
-    Refund For
-  </Label>
-  <select
-    id="refund-for"
-    defaultValue=""
-    className="w-full  border-none focus:ring-0 focus:outline-none font-normal lg:text-base text-gray-900 bg-white rounded-lg  focus:bg-blue-50"
-  >
-    <option value="" disabled className="text-gray-400">
-      Select
-    </option>
-    <option value="option1" className="hover:bg-blue-100">
-      Option 1
-    </option>
-    <option value="option2" className="hover:bg-blue-100">
-      Option 2
-    </option>
-    <option value="option3" className="hover:bg-blue-100">
-      Option 3
-    </option>
-  </select>
-</div>
-
+      <div className="relative w-full border border-gray-300 rounded-lg px-4 pt-4 pb-2 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
+        <Label
+          htmlFor="refund-for"
+          className="absolute -top-2 left-4 px-2 text-xs font-normal text-gray-500 bg-white"
+        >
+          Refund For
+        </Label>
+        <select
+          id="refund-for"
+          defaultValue=""
+          className="w-full h-full border-none focus:ring-0 focus:outline-none font-normal lg:text-base text-gray-900 bg-transparent focus:bg-green-200"
+        >
+          <option value="" disabled>
+            Select
+          </option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      </div>
 
       {/* date  */}
 

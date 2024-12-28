@@ -86,3 +86,27 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.rdp-caption_label {
+  font-size: 16px;
+  font-weight: 600;
+}
+.rdp-chevron {
+  width: 25px;
+  height: 25px;
+  fill: #1571e7 !important;
+}
+.rdp-today:not(.rdp-outside) {
+  color: #1571e7 !important;
+}
+.rdp-selected .rdp-day_button {
+  font-size: 14px !important;
+}
+.rdp-range_start .rdp-day_button,
+.rdp-range_end .rdp-day_button {
+  background-color: #1571e7 !important;
+  border-color: #1571e7 !important;
+}
+.rdp-range_middle {
+  background-color: #f5f7fa !important;
+}

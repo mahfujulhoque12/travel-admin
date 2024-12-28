@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 // Static data for flight bookings
-const flightBookings = [
+const packageBooking = [
   {
     id: 1,
     issueDate: "2024-12-21",
@@ -91,15 +91,15 @@ export async function GET(req) {
   const startIndex = (page - 1) * limit;
   const endIndex = startIndex + limit;
 
-  const paginatedData = flightBookings.slice(startIndex, endIndex);
+  const paginatedData = packageBooking.slice(startIndex, endIndex);
 
-  const totalPages = Math.ceil(flightBookings.length / limit);
+  const totalPages = Math.ceil(packageBooking.length / limit);
 
   return NextResponse.json({
     page,
     limit,
     totalPages,
-    totalItems: flightBookings.length,
+    totalItems: packageBooking.length,
     data: paginatedData,
   });
 }

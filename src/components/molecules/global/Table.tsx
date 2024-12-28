@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import ReusableButton from "./ReusableButton";
-
+import ReusableButton from "@/components/molecules/global/ReusableButton";
+import Image from "next/image";
 type CellType = "button" | "text" | "checkbox" | "image" | "select";
 
 export interface ColumnConfig {
@@ -21,23 +23,22 @@ interface ReusableTableProps {
   columns: ColumnConfig[];
 }
 
-const ReusableTable: React.FC<ReusableTableProps> = ({ data, columns }) => {
-  // Function to get status color
+const Table: React.FC<ReusableTableProps> = ({ data, columns }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "Booked":
+      case "booked":
         return "text-[#20B038]";
-      case "Hold":
+      case "hold":
         return "text-yellow-400";
-      case "Cancelled":
-        return " text-red-700";
+      case "cancelled":
+        return "text-red-700";
       default:
-        return " text-gray-700";
+        return "text-gray-700";
     }
   };
 
   return (
-    <div className="overflow-x-auto mt-8 shadow-sm">
+    <div className="overflow-x-auto shadow-sm">
       <table className="min-w-full table-auto border-collapse border">
         <thead>
           <tr className="bg-[#D8ECFD]">
@@ -53,10 +54,10 @@ const ReusableTable: React.FC<ReusableTableProps> = ({ data, columns }) => {
         </thead>
         <tbody>
           {data.map((row, rowIndex) => (
-            <tr key={rowIndex} className="">
+            <tr key={`row-${row.id || rowIndex}`} className="">
               {columns.map((column) => (
                 <td
-                  key={column.key}
+                  key={`row-${row.id || rowIndex}-col-${column.key}`}
                   className={`border-b px-4 py-2 font-normal text-xs ${
                     column.key === "status" && row[column.key]
                       ? getStatusColor(row[column.key])
@@ -75,9 +76,11 @@ const ReusableTable: React.FC<ReusableTableProps> = ({ data, columns }) => {
                     <input type="checkbox" checked={row[column.key]} readOnly />
                   )}
                   {column.type === "image" && (
-                    <img
+                    <Image
                       src={row[column.key]}
                       alt="Image"
+                      width={16}
+                      height={16}
                       className="w-16 h-16 object-cover rounded"
                     />
                   )}
@@ -85,12 +88,13 @@ const ReusableTable: React.FC<ReusableTableProps> = ({ data, columns }) => {
                     <select
                       className="bg-[#D8ECFD] text-[#1768D0] p-2 rounded"
                       defaultValue={row[column.key]}
-                      onChange={(e) =>
-                        column.onSelectChange?.(row, e.target.value)
-                      }
+                      onChange={(e) => {}}
                     >
                       {column.selectOptions.map((option, index) => (
-                        <option key={index} value={option}>
+                        <option
+                          key={`${row.id || rowIndex}-opt-${index}`}
+                          value={option}
+                        >
                           {option}
                         </option>
                       ))}
@@ -106,4 +110,4 @@ const ReusableTable: React.FC<ReusableTableProps> = ({ data, columns }) => {
   );
 };
 
-export default ReusableTable;
+export default Table;
